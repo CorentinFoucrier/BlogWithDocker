@@ -1,9 +1,42 @@
 <?php
 require 'assets/includes/_db.php';
 
-$result = $pdo->prepare("SELECT * FROM post LIMIT 50");
-$result->execute([]);
-$article = $result->fetchAll();
+switch ($_GET['page']) {
+    case 2:
+        $result = $pdo->prepare("SELECT * FROM post LIMIT 10, 10");
+        $result->execute([]);
+        $article = $result->fetchAll();
+        break;
+        
+    case 3:
+        $result = $pdo->prepare("SELECT * FROM post LIMIT 20, 10");
+        $result->execute([]);
+        $article = $result->fetchAll();
+        break;
+
+        
+    case 4:
+        $result = $pdo->prepare("SELECT * FROM post LIMIT 30, 10");
+        $result->execute([]);
+        $article = $result->fetchAll();
+        break;
+
+    case 5:
+        $result = $pdo->prepare("SELECT * FROM post LIMIT 40, 10");
+        $result->execute([]);
+        $article = $result->fetchAll();
+        break;
+    
+    default:
+        $result = $pdo->prepare("SELECT * FROM post LIMIT 10");
+        $result->execute([]);
+        $article = $result->fetchAll();
+        break;
+}
+
+// $result = $pdo->prepare("SELECT * FROM post LIMIT 50");
+// $result->execute([]);
+// $article = $result->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +55,9 @@ $article = $result->fetchAll();
     <section>
         <? foreach ($article as $key => $value) : ?>
         <article>
-            <h2><?= $value['name'] ?></h2>
+            <h2><?= 'N°'. $value['id'] . ' -' ?> <?= $value['name'] ?></h2>
             <p><?= substr($value['content'], 0, 150) ?></p>
+            
         </article>
         <? endforeach ?>
     </section>
@@ -31,11 +65,11 @@ $article = $result->fetchAll();
     <footer>
         <div>
             <ul>
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
+                <li><a href="/">1</a></li>
+                <li><a href="/?page=2">2</a></li>
+                <li><a href="/?page=3">3</a></li>
+                <li><a href="/?page=4">4</a></li>
+                <li><a href="/?page=5">5</a></li>
             </ul>
         </div>
     </footer>
