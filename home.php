@@ -1,42 +1,19 @@
 <?php
 require 'assets/includes/_db.php';
 
-switch ($_GET['page']) {
-    case 2:
-        $result = $pdo->prepare("SELECT * FROM post LIMIT 10, 10");
-        $result->execute([]);
-        $article = $result->fetchAll();
-        break;
-        
-    case 3:
-        $result = $pdo->prepare("SELECT * FROM post LIMIT 20, 10");
-        $result->execute([]);
-        $article = $result->fetchAll();
-        break;
+$pagination = $pdo->query('SELECT count(id) FROM post')->fetch()[0]/10;
 
-        
-    case 4:
-        $result = $pdo->prepare("SELECT * FROM post LIMIT 30, 10");
-        $result->execute([]);
-        $article = $result->fetchAll();
-        break;
-
-    case 5:
-        $result = $pdo->prepare("SELECT * FROM post LIMIT 40, 10");
-        $result->execute([]);
-        $article = $result->fetchAll();
-        break;
-    
-    default:
-        $result = $pdo->prepare("SELECT * FROM post LIMIT 10");
-        $result->execute([]);
-        $article = $result->fetchAll();
-        break;
+if (null !== $_GET['page'] && intval($_GET['page']) > 0 && $_GET['page'] <= $pagination) {
+    $start = 10 * $_GET['page'] -10;
+} else {
+    if (null !== $_GET['page'] && !inval($_GET['page']) || $_GET['page'] > $pagination) {
+        $message = 'Page introuvable !';
+    }
+    $start = 0;
 }
 
-// $result = $pdo->prepare("SELECT * FROM post LIMIT 50");
-// $result->execute([]);
-// $article = $result->fetchAll();
+$req = $pdo->query("SELECT * FROM post ORDER BY id LIMIT 10 OFFSET {$start}");
+
 ?>
 
 <!DOCTYPE html>
@@ -53,11 +30,10 @@ switch ($_GET['page']) {
     </header>
 
     <section>
-        <? foreach ($article as $key => $value) : ?>
+        <? foreach ($req as $key => $value) : ?>
         <article>
             <h2><?= 'N°'. $value['id'] . ' -' ?> <?= $value['name'] ?></h2>
             <p><?= substr($value['content'], 0, 150) ?></p>
-            
         </article>
         <? endforeach ?>
     </section>
@@ -66,10 +42,9 @@ switch ($_GET['page']) {
         <div>
             <ul>
                 <li><a href="/">1</a></li>
-                <li><a href="/?page=2">2</a></li>
-                <li><a href="/?page=3">3</a></li>
-                <li><a href="/?page=4">4</a></li>
-                <li><a href="/?page=5">5</a></li>
+                <?php for ($i=2; $i <= $pagination; $i++) : ?>
+                <li><a href="/?page=<?= $i ?>"><?= $i ?></a></li>
+                <?php endfor ?>
             </ul>
         </div>
     </footer>
