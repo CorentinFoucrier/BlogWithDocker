@@ -12,7 +12,7 @@ if (null !== $_GET['page'] && intval($_GET['page']) > 0 && $_GET['page'] <= $pag
     $start = 0;
 }
 
-$req = $pdo->query("SELECT * FROM post ORDER BY id LIMIT 10 OFFSET {$start}");
+$req = $pdo->query("SELECT * FROM post ORDER BY id LIMIT 10 OFFSET {$start}")->fetchAll();
 
 ?>
 
