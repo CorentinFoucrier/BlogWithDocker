@@ -6,6 +6,10 @@ sleep 3;
 
 docker-compose rm -f
 
-echo "Container stopped !"
+echo "#----------------"
+echo "#"
+echo "# Done !"
+echo "#"
+echo "#----------------"
 
 exit 0

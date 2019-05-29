@@ -13,4 +13,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN echo fr_FR.UTF-8 UTF-8 > /etc/locale.gen && locale-gen
 
-WORKDIR /var/wwwdps
+WORKDIR /var/www
