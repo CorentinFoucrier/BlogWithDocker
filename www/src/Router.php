@@ -21,8 +21,9 @@ class Router {
     {
         $match = $this->router->match();
 
+        ob_start();
+
         if (is_array($match)) {
-            ob_start();
             $params = $match['params'];
             require $this->pathToFile($match['target']);
         } else {
@@ -30,6 +31,7 @@ class Router {
             header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
             require $this->pathToFile("layout/404");
         }
+        
         $content = ob_get_clean();
         require $this->pathToFile("layout/default");
     }
