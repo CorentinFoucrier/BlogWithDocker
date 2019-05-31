@@ -20,7 +20,7 @@ class Router {
     public function run(): void
     {
         $match = $this->router->match();
-
+        
         ob_start();
 
         if (is_array($match)) {
@@ -31,7 +31,6 @@ class Router {
             header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
             require $this->pathToFile("layout/404");
         }
-        
         $content = ob_get_clean();
         require $this->pathToFile("layout/default");
     }
