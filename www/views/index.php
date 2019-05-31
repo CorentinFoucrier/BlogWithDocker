@@ -48,14 +48,16 @@ $req = $pdo->query("SELECT * FROM post
         </article>
         <? endforeach ?>
     </section>
+    
 
     <footer>
         <div>
             <ul>
                 <li><a href="/">1</a></li>
-                <?php for ($i=1; $i <= $nbPage; $i++) : ?>
-                <li><a href="/?page=<?= $i ?>"><?= $i ?></a></li>
-                <?php endfor ?>
+                <? for ($i=2; $i <= $nbPage; $i++) : ?>
+                    <? $uri = $i == 1 ? "" : "?page=" . $i; ?>
+                    <li><a href="/<?= $uri ?>"><?= $i ?></a></li>
+                <? endfor ?>
             </ul>
         </div>
     </footer>

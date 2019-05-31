@@ -7,7 +7,7 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-if (isset($_GET['page']) && ((int)$_GET['page'] <= 1) || !is_int((int)$_GET['page']) || is_float($_GET['page'] + 0)) {
+if (isset($_GET["page"]) && ((int)$_GET["page"] <= 1 || !is_int((int)$_GET["page"]) || is_float($_GET["page"] + 0))) {
     if ((int)$_GET['page'] == 1) {
         $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
         $get = $_GET;
