@@ -13,8 +13,11 @@ $title = "Super Blog";
 
 //$pdo = new PDO('mysql:dbname=blog;host=blog.mysql;charset=UTF8', 'userblog', '123456');
 
-$pdo = new PDO("mysql:dbname=" . getenv("MYSQL_DATABASE") . ";host=" . getenv("MYSQL_HOST") . ";charset=UTF8", getenv("MYSQL_USER") , getenv("MYSQL_PASSWORD"));
-
+$pdo = new PDO(
+    "mysql:host=" . getenv('MYSQL_HOST') . ";dbname=" . getenv('MYSQL_DATABASE'),
+    getenv('MYSQL_USER'),
+    getenv('MYSQL_PASSWORD')
+);
 
 $nbpost = $pdo->query('SELECT count(id) FROM post')->fetch()[0];
 $perPage = 6;
