@@ -1,5 +1,7 @@
 <?php
-require_once '/var/www/vendor/autoload.php';
+$basePath = dirname(__dir__) . DIRECTORY_SEPARATOR;
+
+require_once $basePath . 'vendor'. DIRECTORY_SEPARATOR .'autoload.php';
 
 $pdo = new PDO('mysql:dbname=blog;host=blog.mysql;charset=UTF8', 'userblog', '123456');
 
