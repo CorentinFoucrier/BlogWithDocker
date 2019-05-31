@@ -17,7 +17,7 @@ $pdo = new PDO("mysql:dbname=" . getenv("MYSQL_DATABASE") . ";host=" . getenv("M
 
 
 $nbpost = $pdo->query('SELECT count(id) FROM post')->fetch()[0];
-$perPage = 9;
+$perPage = 6;
 $nbPage = ceil($nbpost / $perPage);
 
 if ((int)$_GET['page'] > $nbPage) {
@@ -52,11 +52,11 @@ $req = $pdo->query("SELECT * FROM post
 
     <footer>
         <div>
-            <ul>
-                <li><a href="/">1</a></li>
-                <? for ($i=2; $i <= $nbPage; $i++) : ?>
+            <ul class="pagination">
+                <? for ($i=1; $i <= $nbPage; $i++) : ?>
+                    <?php $class = $currentPage == $i ? "active" : ""; ?>
                     <? $uri = $i == 1 ? "" : "?page=" . $i; ?>
-                    <li><a href="/<?= $uri ?>"><?= $i ?></a></li>
+                    <li><a class="<?= $class ?>" href="/<?= $uri ?>"><?= $i ?></a></li>
                 <? endfor ?>
             </ul>
         </div>
