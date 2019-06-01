@@ -20,7 +20,7 @@ $pdo = new PDO(
 );
 
 $nbpost = $pdo->query('SELECT count(id) FROM post')->fetch()[0];
-$perPage = 9;
+$perPage = 6;
 $nbPage = ceil($nbpost / $perPage);
 
 if ((int)$_GET['page'] > $nbPage) {
@@ -56,17 +56,29 @@ $req = $pdo->query("SELECT * FROM post
     <footer>
         <div>
             <ul class="pagination">
-                <?php $classBefore = $currentPage == 1 ? "dnone" : ""; ?>
-                <li><a class="<?= $classBefore ?>" href="/?page=<?= ($currentPage - 1) ?>">&laquo;</a></li>
+                <? $classBefore = $currentPage == 1 ? "dnone" : ""; ?>
+                <li class="<?= $classBefore ?>">
+                    <? if ($currentPage == 1) { ?>
+                        <p>&laquo;</p>
+                    <? } else { ?>
+                        <a href="/?page=<?= ($currentPage - 1) ?>">&laquo;</a>
+                    <? } ?>
+                </li>
 
                 <? for ($i = 1; $i <= $nbPage; $i++) : ?>
-                    <?php $class = $currentPage == $i ? "active" : ""; ?>
+                    <? $class = $currentPage == $i ? "active" : ""; ?>
                     <? $uri = $i == 1 ? "" : "?page=" . $i; ?>
                     <li><a class="<?= $class ?>" href="/<?= $uri ?>"><?= $i ?></a></li>
                 <? endfor ?>
 
-                <?php $classAfter = $currentPage == $nbPage ? "dnone" : ""; ?>
-                <li><a class="<?= $classAfter ?>" href="/?page=<?= ($currentPage + 1) ?>">&raquo;</a></li>
+                <? $classAfter = $currentPage == $nbPage ? "dnone" : ""; ?>
+                <li class="<?= $classAfter ?>">
+                    <? if ($currentPage == $nbPage) { ?>
+                        <p>&raquo;</p>
+                    <? } else { ?>
+                        <a href="/?page=<?= ($currentPage + 1) ?>">&raquo;</a>
+                    <? } ?>
+                </li>
             </ul>
         </div>
     </footer>

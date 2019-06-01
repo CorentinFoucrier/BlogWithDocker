@@ -1,6 +1,13 @@
+html {
+    height: 100%;
+}
+
 body {
+    min-height: 100%;
     display: grid;
     grid-template-columns: 10em 1fr 10em;
+    grid-template-rows: auto 1fr auto;
+    margin: 0;
 }
 
 header {
@@ -23,14 +30,17 @@ footer {
     grid-column-start: 2;
     grid-template-columns: 1fr 1fr 1fr;
     border-top: 1px solid #000;
+    grid-row-start: 3;
+    grid-row-end: 4;
 }
 
 article {
     display: grid;
     grid-template-columns: 10px 1fr 10px;
-    height: 30vh;
+    height: 90%;
     border: 1px solid rgb(219, 219, 219);
     border-radius: 0.2em;
+    overflow: auto;
 }
 
 article h2 {
@@ -54,8 +64,9 @@ footer > div {
     flex-direction: row;
 }
 
-a.dnone {
-    display: none;
+.dnone {
+    background-color: rgb(238, 238, 238);
+    cursor: not-allowed;
 }
 
 .pagination {
@@ -64,13 +75,14 @@ a.dnone {
     padding: 0;
 }
 
-.pagination a {
+.pagination a, .pagination p {
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .3s;
     border: 1px solid #ddd;
+    margin: 0;
 }
 
 .pagination a.active {
@@ -79,4 +91,6 @@ a.dnone {
     border: 1px solid #4CAF50;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
