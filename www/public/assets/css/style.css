@@ -1,6 +1,6 @@
 body {
     display: grid;
-    grid-template-columns: 40px 1fr 40px;
+    grid-template-columns: 10em 1fr 10em;
 }
 
 header {
@@ -13,7 +13,9 @@ section {
     display: grid;
     grid-column-start: 2;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 40px;
+    grid-gap: 30px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 footer {
@@ -21,6 +23,24 @@ footer {
     grid-column-start: 2;
     grid-template-columns: 1fr 1fr 1fr;
     border-top: 1px solid #000;
+}
+
+article {
+    display: grid;
+    grid-template-columns: 10px 1fr 10px;
+    height: 30vh;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 0.2em;
+}
+
+article h2 {
+    margin-bottom: 0;
+    border-bottom: 1px dotted rgb(219, 219, 219);
+}
+
+article > * {
+    display: grid;
+    grid-column-start: 2;
 }
 
 div {
@@ -32,6 +52,10 @@ footer > div {
     display: flex;
     justify-content: center;
     flex-direction: row;
+}
+
+a.dnone {
+    display: none;
 }
 
 .pagination {
