@@ -16,6 +16,11 @@ header {
     text-align: center;
 }
 
+header h1 {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+}
+
 section {
     display: grid;
     grid-column-start: 2;
@@ -37,7 +42,7 @@ footer {
 article {
     display: grid;
     grid-template-columns: 10px 1fr 10px;
-    height: 90%;
+    height: 250px;
     border: 1px solid rgb(219, 219, 219);
     border-radius: 0.2em;
     overflow: auto;
@@ -48,10 +53,52 @@ article h2 {
     border-bottom: 1px dotted rgb(219, 219, 219);
 }
 
+article p {
+    margin-bottom: 0;
+}
+
 article > * {
     display: grid;
     grid-column-start: 2;
 }
+
+article > div {
+    display: grid;
+    grid-template-columns: 1fr 150px;
+    margin-bottom: 1em;
+    height: 1em;
+}
+
+article > div > a {
+    display: grid;
+    grid-column-start: 2;
+    text-decoration: none;
+}
+
+.myButton {
+    -moz-box-shadow: 0px 1px 0px 0px #d9c8d9;
+    -webkit-box-shadow: 0px 1px 0px 0px #d9c8d9;
+    box-shadow: 0px 1px 0px 0px #d9c8d9;
+    background-color:#858585;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+    border:2px solid #e6e6e6;
+    cursor:pointer;
+    color:#ffffff;
+    font-weight:bold;
+    padding:8px 12px;
+    text-decoration:none;
+    text-align: center;
+}
+.myButton:hover {
+    background-color:#a3a3a3;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
 
 div {
     display: grid;

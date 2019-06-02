@@ -4,14 +4,7 @@
  * 
  */
 
-// if (isset($_GET['page']) && ((int)$_GET['page'] <= 1) || !is_int((int)$_GET['page']) || is_float($_GET['page'] + 0)) {
-//     header('Locaion: /');
-//     exit();
-// }
-
 $title = "Super Blog";
-
-//$pdo = new PDO('mysql:dbname=blog;host=blog.mysql;charset=UTF8', 'userblog', '123456');
 
 $pdo = new PDO(
     "mysql:host=" . getenv('MYSQL_HOST') . ";dbname=" . getenv('MYSQL_DATABASE'),
@@ -33,7 +26,7 @@ if (isset($_GET['page'])) {
 } else {
     $currentPage = 1;
 }
-//dd($currentPage);
+
 $offset = ($currentPage - 1) * $perPage;
 
 $req = $pdo->query("SELECT * FROM post 
@@ -47,11 +40,13 @@ $req = $pdo->query("SELECT * FROM post
         <? foreach ($req as $key => $value) : ?>
         <article>
             <h2><?= 'N°'. $value['id'] . ' -' ?> <?= $value['name'] ?></h2>
-            <p><?= substr($value['content'], 0, 200) ?>...</p>
+            <p><?= substr($value['content'], 0, 100) ?>...</p>
+            <div>
+                <a class="myButton" href="/article/<?= $value['id'] ?>">About more...</a>
+            </div>
         </article>
         <? endforeach ?>
     </section>
-    
 
     <footer>
         <div>
