@@ -33,16 +33,16 @@ $req = $pdo->query("SELECT * FROM post
                     ORDER BY id 
                     LIMIT {$perPage} 
                     OFFSET {$offset}")
-                    ->fetchAll();
+                    ->fetchAll(\PDO::FETCH_OBJ);
 
 ?>
     <section>
         <? foreach ($req as $key => $value) : ?>
         <article>
-            <h2><?= 'N°'. $value['id'] . ' -' ?> <?= $value['name'] ?></h2>
-            <p><?= substr($value['content'], 0, 100) ?>...</p>
+            <h2><?= 'N°'. $value->id . ' -' ?> <?= $value->name ?></h2>
+            <p><?= substr($value->content, 0, 100) ?>...</p>
             <div>
-                <a class="myButton" href="/article/<?= $value['id'] ?>">About more...</a>
+                <a class="myButton" href="/article/<?= $value->slug ?>-<?= $value->id ?>">About more...</a>
             </div>
         </article>
         <? endforeach ?>
