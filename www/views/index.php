@@ -36,9 +36,10 @@ $req = $pdo->query("SELECT * FROM post
                     ->fetchAll(\PDO::FETCH_OBJ);
 
 ?>
-    <section>
+
+    <section class="home">
         <? foreach ($req as $key => $value) : ?>
-        <article>
+        <article class="homeArticle">
             <h2><?= 'N°'. $value->id . ' -' ?> <?= $value->name ?></h2>
             <p><?= substr($value->content, 0, 100) ?>...</p>
             <div>

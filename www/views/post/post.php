@@ -15,11 +15,14 @@ $pdo = new PDO(
 
 $post = $pdo->query("SELECT * FROM `post` WHERE `id` = {$id}")->fetch(\PDO::FETCH_OBJ);
 ?>
+<section class="post">
+    <article>
+        <h1><?= $post->name ?></h1>
 
-<h1><?= $post->name ?></h1>
+        <p><?= $post->content ?></p>
 
-<p><?= $post->content ?></p>
+        <p>article avec l'id <?= $id . " et le slug " . $post->slug ?></p>
 
-<p>article avec l'id <?= $id . " et le slug " . $post->slug ?></p>
-
-<a href="/"><button>Retour</button></a>
+        <a href="/"><button>Retour</button></a>
+    </article>
+</section>
