@@ -1,8 +1,10 @@
 <?php
 /**
- *  fichier qui génère la vue pour l'url "/article/[i:id]"
+ *  fichier qui génère la vue pour l'url "/article/[*:slug]-[i:id]"
  * 
  */
+
+use App\Model\Post;
 
 $id = $params['id'];
 $slug = $params['slug'];
@@ -13,16 +15,22 @@ $pdo = new PDO(
     getenv('MYSQL_PASSWORD')
 );
 
-$post = $pdo->query("SELECT * FROM `post` WHERE `id` = {$id}")->fetch(\PDO::FETCH_OBJ);
+$statement = $pdo->prepare("SELECT * FROM `post` WHERE `id` = ?");
+$statement->execute([$id]);
+$statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
+$post = $statement->fetch();
+
+$article = 'Article : ' . $post->getName();
 ?>
 <section class="post">
     <article>
-        <h1><?= $post->name ?></h1>
+        <h1><?= $article ?></h1>
 
-        <p><?= $post->content ?></p>
+        <p><?= nl2br(htmlspecialchars($post->getContent())) ?></p>
 
-        <p>article avec l'id <?= $id . " et le slug " . $post->slug ?></p>
+        <p>article avec l'id <?= $id . " et le slug " . $slug ?></p>
 
-        <a href="/"><button>Retour</button></a>
+        <span class="text-muted">Poster le : <?= $post->getCreatedAt() ?></span><br />
+
     </article>
 </section>

@@ -59,8 +59,8 @@ $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
 echo "||||||||||||";
 $faker = Faker\Factory::create('fr_FR'); // apelle de la methode create de la class Factory. Faker\ est un namespace.
 echo "||";
-// $posts = [];
-// $categories = [];
+$posts = [];
+$categories = [];
 
 for ($i = 0; $i < 50; $i++){
     $pdo->exec("INSERT INTO post SET name='{$faker->sentence()}', 
@@ -69,7 +69,7 @@ for ($i = 0; $i < 50; $i++){
         created_at='{$faker->date} {$faker->time}'
     ");
     echo "|";
-    //$posts = $pdo->lastInsertId();
+    $posts[] = $pdo->lastInsertId();
 }
 
 for ($i = 0; $i < 5; $i++){
@@ -78,27 +78,14 @@ for ($i = 0; $i < 5; $i++){
         slug='{$faker->slug}'
     ");
     echo "|";
-    //$categories = $pdo->lastInsertId();
+    $categories[] = $pdo->lastInsertId();
 }
 
-// foreach ($posts as $post) {
-//     $randomCategories = $faker->randomElements($categories, 2); //randomElements($array = array ('a','b','c'), $count = 1) // array('c')
-//     foreach ($randomCategories as $category) {
-//         $pdo->exec("INSERT INTO post_category SET 
-//             post_id={$post}, 
-//             category_id=$category}
-//         ");
-//     }
-// }
-
-// Peut remplacé le foreach.
-
-for ($i = 0; $i < 50; $i++){
-    $pdo->exec("INSERT INTO post_category SET 
-        post_id='{$faker->randomDigitNotNull}', 
-        category_id='{$faker->randomDigitNotNull}'
-    ");
-    echo "|";
+foreach ($posts as $post) {
+    $randomCategories = $faker->randomElements($categories, 2);
+    foreach ($randomCategories as $category) {
+        $pdo->exec("INSERT INTO post_category SET post_id = {$post}, category_id = {$category}");
+    }
 }
 
 $passwordhash = password_hash("admin", PASSWORD_BCRYPT);

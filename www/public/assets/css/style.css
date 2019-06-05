@@ -1,9 +1,15 @@
 html {
+    font-family: 'Roboto', sans-serif;
     height: 100%;
 }
 
 .highlight {
     background: yellow;
+}
+
+.text-muted {
+    color: #3f4247;
+    float: right;
 }
 
 body {
@@ -14,12 +20,13 @@ body {
 main{
     width: 90%;
     margin: 0 auto;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
 header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-start: 2;
     text-align: center;
 }
 
@@ -37,22 +44,39 @@ header > div {
     grid-column-start: 3;
 }
 
+nav.navigation > ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
 section.home {
     display: grid;
-    grid-column-start: 2;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 30px;
     margin-bottom: 30px;
     margin-top: 30px;
 }
 
-footer {
+nav.footer {
     display: grid;
-    grid-column-start: 2;
     grid-template-columns: 1fr 1fr 1fr;
     border-top: 1px solid #000;
     grid-row-start: 3;
     grid-row-end: 4;
+}
+
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    background: #2d2d2d;
+}
+
+footer > div {
+    color: #fff;
+    text-align: center;
 }
 
 article.homeArticle {
@@ -121,7 +145,7 @@ div {
     grid-column-start: 2;
 }
 
-footer > div {
+nav.footer > div {
     display: flex;
     justify-content: center;
     flex-direction: row;

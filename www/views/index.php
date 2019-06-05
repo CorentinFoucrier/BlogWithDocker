@@ -4,6 +4,9 @@
  * 
  */
 
+use App\Model\Post;
+use App\Helpers\Text;
+
 $title = "Super Blog";
 
 $pdo = new PDO(
@@ -29,27 +32,28 @@ if (isset($_GET['page'])) {
 
 $offset = ($currentPage - 1) * $perPage;
 
-$req = $pdo->query("SELECT * FROM post 
+$statement = $pdo->query("SELECT * FROM post 
                     ORDER BY id 
                     LIMIT {$perPage} 
-                    OFFSET {$offset}")
-                    ->fetchAll(\PDO::FETCH_OBJ);
-
+                    OFFSET {$offset}");
+$statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
+$posts = $statement->fetchAll();
+//dd($posts);
 ?>
 
     <section class="home">
-        <? foreach ($req as $key => $value) : ?>
+        <? foreach ($posts as $post) : ?>
         <article class="homeArticle">
-            <h2><?= 'N°'. $value->id . ' -' ?> <?= $value->name ?></h2>
-            <p><?= substr($value->content, 0, 100) ?>...</p>
+            <h2><?= 'N°'. $post->getId() . ' -' ?> <?= $post->getName() ?></h2>
+            <p><?= Text::excerpt($post->getContent()) ?><span class="text-muted">Poster le : <?= $post->getCreatedAt() ?></span></p>
             <div>
-                <a class="myButton" href="/article/<?= $value->slug ?>-<?= $value->id ?>">About more...</a>
+                <a class="myButton" href="<?= $router->url('post', ['id' => $post->getID(), 'slug' => $post->getSlug()]) ?>">About more...</a>
             </div>
         </article>
         <? endforeach ?>
     </section>
 
-    <footer>
+    <nav class="footer">
         <div>
             <ul class="pagination">
                 <? $classBefore = $currentPage == 1 ? "dnone" : ""; ?>
@@ -77,4 +81,4 @@ $req = $pdo->query("SELECT * FROM post
                 </li>
             </ul>
         </div>
-    </footer>
+    </nav>
