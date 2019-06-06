@@ -12,8 +12,6 @@ class Post {
 
     private $name;
 
-    private $subString;
-
     public function getCreatedAt($format = 'd/m/Y h:i') :string 
     {
         return (new \DateTime($this->created_at))->format($format);

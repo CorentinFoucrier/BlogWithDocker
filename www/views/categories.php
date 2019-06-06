@@ -5,12 +5,9 @@
  */
 
 use App\Model\Post;
+use App\Connexion;
 
-$pdo = new PDO(
-    "mysql:host=" . getenv('MYSQL_HOST') . ";dbname=" . getenv('MYSQL_DATABASE'),
-    getenv('MYSQL_USER'),
-    getenv('MYSQL_PASSWORD')
-);
+$pdo = Connexion::getPdo();
 
 $title = "Catégories";
 $statement = $pdo->prepare("SELECT * FROM category");
