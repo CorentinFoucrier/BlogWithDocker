@@ -55,11 +55,9 @@ $title = $post->getName();
         <? endforeach ?>
         </h3>
 
-        <p><?= nl2br(htmlspecialchars($post->getContent())) ?></p>
+        <p><?= htmlspecialchars($post->getContent()) ?></p>
 
-        <p>article avec l'id <?= $id . " et le slug " . $slug ?></p>
-
-        <span class="text-muted">Poster le : <?= $post->getCreatedAt() ?></span><br />
+        <span class="text-muted">Posté le : <?= $post->getCreatedAt() ?></span><br />
 
     </article>
 </section>

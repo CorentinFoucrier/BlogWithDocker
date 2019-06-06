@@ -42,7 +42,7 @@ $posts = $statement->fetchAll();
         <? foreach ($posts as $post) : ?>
         <article class="homeArticle">
             <h2><?= 'N°'. $post->getId() . ' -' ?> <?= $post->getName() ?></h2>
-            <p><?= Text::excerpt($post->getContent()) ?><span class="text-muted">Poster le : <?= $post->getCreatedAt() ?></span></p>
+            <p><?= Text::excerpt($post->getContent()) ?><span class="text-muted">Posté le : <?= $post->getCreatedAt() ?></span></p>
             <div>
                 <a class="myButton" href="<?= $router->url('post', ['id' => $post->getID(), 'slug' => $post->getSlug()]) ?>">About more...</a>
             </div>
@@ -56,7 +56,7 @@ $posts = $statement->fetchAll();
                 <? $classBefore = $currentPage == 1 ? "dnone" : ""; ?>
                 <li class="<?= $classBefore ?>">
                     <? if ($currentPage == 1) { ?>
-                        <p>&laquo;</p>
+                        <a>&laquo;</a>
                     <? } else { ?>
                         <a href="/?page=<?= ($currentPage - 1) ?>">&laquo;</a>
                     <? } ?>
@@ -71,7 +71,7 @@ $posts = $statement->fetchAll();
                 <? $classAfter = $currentPage == $nbPage ? "dnone" : ""; ?>
                 <li class="<?= $classAfter ?>">
                     <? if ($currentPage == $nbPage) { ?>
-                        <p>&raquo;</p>
+                        <a>&raquo;</a>
                     <? } else { ?>
                         <a href="/?page=<?= ($currentPage + 1) ?>">&raquo;</a>
                     <? } ?>

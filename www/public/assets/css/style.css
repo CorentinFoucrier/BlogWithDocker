@@ -12,7 +12,13 @@ html {
     float: right;
 }
 
+p {
+    line-height: 27px;
+}
+
 body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     min-height: 100%;
     margin: 0;
 }
@@ -82,7 +88,7 @@ footer > div {
 article.homeArticle {
     display: grid;
     grid-template-columns: 10px 1fr 10px;
-    height: 250px;
+    height: 260px;
     border: 1px solid rgb(219, 219, 219);
     border-radius: 0.2em;
     overflow: auto;
