@@ -40,32 +40,4 @@ $posts = $paginated->getItems();
         <? endforeach ?>
     </section>
 
-    <nav class="footer">
-        <div>
-            <ul class="pagination">
-                <? $classBefore = $currentPage == 1 ? "dnone" : ""; ?>
-                <li class="<?= $classBefore ?>">
-                    <? if ($currentPage == 1) { ?>
-                        <a>&laquo;</a>
-                    <? } else { ?>
-                        <a href="/?page=<?= ($currentPage - 1) ?>">&laquo;</a>
-                    <? } ?>
-                </li>
-
-                <? for ($i = 1; $i <= $nbPage; $i++) : ?>
-                    <? $class = $currentPage == $i ? "active" : ""; ?>
-                    <? $uri = $i == 1 ? "" : "?page=" . $i; ?>
-                    <li><a class="<?= $class ?>" href="/<?= $uri ?>"><?= $i ?></a></li>
-                <? endfor ?>
-
-                <? $classAfter = $currentPage == $nbPage ? "dnone" : ""; ?>
-                <li class="<?= $classAfter ?>">
-                    <? if ($currentPage == $nbPage) { ?>
-                        <a>&raquo;</a>
-                    <? } else { ?>
-                        <a href="/?page=<?= ($currentPage + 1) ?>">&raquo;</a>
-                    <? } ?>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<?= $paginated->getNavHtml() ?>

@@ -51,6 +51,15 @@ header > div {
     grid-column-start: 3;
 }
 
+header a{
+    color: #fefefe;
+    text-decoration: none;
+}
+header a:visited{
+    color: #fefefe;
+    text-decoration: none;
+}
+
 nav.navigation {
     display: flex;
     align-items: center;

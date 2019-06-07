@@ -64,3 +64,4 @@ $categories = $paginated->getItems();
         </article>
         <? endforeach ?>
 </section>
+<?= $paginated->getNavHtml() ?>
