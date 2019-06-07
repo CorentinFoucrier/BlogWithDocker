@@ -37,7 +37,7 @@
                 $end = microtime(true);
                 $generationTime = number_format(($end - GENERATE_TIME_START) * 1000, 2);
             ?>
-            <span>Page générer en <?= $generationTime ?>ms</span>
+            <span>Page générée en <?= $generationTime ?>ms</span>
             <?php endif ?>
         </div>
     </footer>

@@ -35,7 +35,7 @@ $statement = $pdo->query("SELECT * FROM post
                     OFFSET {$offset}");
 $statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
 $posts = $statement->fetchAll();
-//dd($posts);
+
 ?>
 
     <section class="home">

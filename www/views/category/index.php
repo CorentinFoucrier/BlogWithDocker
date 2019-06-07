@@ -14,7 +14,7 @@ $statement = $pdo->prepare("SELECT * FROM category");
 $statement->execute([]);
 $statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
 $categories = $statement->fetchAll();
-//dd($categories);
+
 ?>
 <nav>
     <ul>
