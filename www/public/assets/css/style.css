@@ -34,26 +34,34 @@ header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     text-align: center;
+    background: #505050;
+    color: #fefefe;
 }
 
 header h1 {
     grid-column-start: 2;
     margin-top: 0.5em;
-    margin-bottom: 0;
 }
 
 header > div {
     display: flex;
     align-items: center;
     height: 1em;
-    margin: 1em;
+    margin: auto;
     grid-column-start: 3;
+}
+
+nav.navigation {
+    display: flex;
+    align-items: center;
 }
 
 nav.navigation > ul {
     display: flex;
-    justify-content: space-around;
     list-style: none;
+}
+nav.navigation > ul > li {
+    margin: 0 20px;
 }
 
 section.home {

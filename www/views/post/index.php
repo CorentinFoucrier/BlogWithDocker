@@ -12,29 +12,19 @@ $title = "Super Blog";
 
 $pdo = Connexion::getPdo();
 
-$nbpost = $pdo->query('SELECT count(id) FROM post')->fetch()[0];
-$perPage = 6;
-$nbPage = ceil($nbpost / $perPage);
+$id = $params['id'];
 
-if ((int)$_GET['page'] > $nbPage) {
-    header('Location: /');
-    exit();
-}
+$uri = $router->url("home");
 
-if (isset($_GET['page'])) {
-    $currentPage = (int)$_GET['page'];
-} else {
-    $currentPage = 1;
-}
+$paginated = new App\PaginatedQuery(
+    "SELECT count(id) FROM post",
+    "SELECT * FROM post ORDER BY id",
+    Post::class,
+    $uri,
+    6
+);
 
-$offset = ($currentPage - 1) * $perPage;
-
-$statement = $pdo->query("SELECT * FROM post 
-                    ORDER BY id 
-                    LIMIT {$perPage} 
-                    OFFSET {$offset}");
-$statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
-$posts = $statement->fetchAll();
+$posts = $paginated->getItems();
 
 ?>
 

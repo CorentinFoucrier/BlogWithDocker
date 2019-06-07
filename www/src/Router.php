@@ -1,7 +1,8 @@
 <?php
 namespace App;
 
-class Router {
+class Router
+{
     private $router;
     private $viewPath;
     

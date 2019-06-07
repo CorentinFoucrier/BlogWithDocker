@@ -15,20 +15,20 @@ $pdo = Connexion::getPdo();
 
 $statement = $pdo->prepare("SELECT * FROM category WHERE id=?");
 $statement->execute([$id]);
-$statement->setFetchMode(PDO::FETCH_CLASS, Category::class);
-/** @var Category|false */
-$category = $statement->fetch();
+$statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
+/** @var Post|false */
+$post = $statement->fetch();
 
-if (!$category) {
+if (!$post) {
     throw new Exception('Aucune categorie ne correspond à cet ID');
 }
 
-if ($category->getSlug() !== $slug) {
+if ($post->getSlug() !== $slug) {
     $url = $router->url(
         'category',
         [
             'id' => $id,
-            'slug' => $category->getSlug()
+            'slug' => $post->getSlug()
         ]
     );
     http_response_code(301);
@@ -36,14 +36,14 @@ if ($category->getSlug() !== $slug) {
     exit();
 }
 
-$uri = $router->url("category", ["id" => $category->getId(), "slug" => $category->getSlug()]);
+$uri = $router->url("category", ["id" => $post->getId(), "slug" => $post->getSlug()]);
 
 $paginated = new App\PaginatedQuery(
-    "SELECT count(category_id) FROM post_category WHERE category_id = {$category->getId()}",
+    "SELECT count(category_id) FROM post_category WHERE category_id = {$post->getId()}",
     "SELECT p.*
     FROM post p
     JOIN post_category pc ON pc.post_id = p.id
-    WHERE pc.category_id = {$category->getId()}
+    WHERE pc.category_id = {$post->getId()}
     ORDER BY created_at DESC",
     Post::class,
     $uri,

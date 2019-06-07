@@ -2,8 +2,8 @@
 
 namespace App;
 
-class Connexion {
-
+class Connexion
+{
     public static function getPdo() :\PDO
     {
         return new \PDO(
