@@ -8,7 +8,6 @@
     <title><?= $title ? 'Mon site | ' . $title : 'Mon site' ?></title>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= $_SERVER['REQUEST_SCHEME']. '://' . $_SERVER['HTTP_HOST'] ?>/assets/css/style.css">
-    
 </head>
 
 <body>
@@ -25,13 +24,14 @@
             <input type="submit" value="Rechercher" id="submit"/>
         </div>
     </header>
+
     <main class="container">
         <?= $content; ?>
     </main>
 
     <footer>
         <div>
-        <?php
+            <?php
             $generationTime = "";
             if (getenv('ENV_DEV')) :
                 $end = microtime(true);
@@ -45,5 +45,4 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="<?= $_SERVER['REQUEST_SCHEME']. '://' . $_SERVER['HTTP_HOST'] ?>/assets/js/script.js"></script>
 </body>
-
 </html>

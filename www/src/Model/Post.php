@@ -1,15 +1,32 @@
 <?php
 namespace App\Model;
 
-class Post {
+class Post
+{
+    /**
+     * @var string
+     * @access private
+     */
     private $created_at;
-
+    /**
+     * @var int
+     * @access private
+     */
     private $id;
-
+    /**
+     * @var string
+     * @access private
+     */
     private $content;
-
+    /**
+     * @var string
+     * @access private
+     */
     private $slug;
-
+    /**
+     * @var string
+     * @access private
+     */
     private $name;
 
     public function getCreatedAt($format = 'd/m/Y h:i') :string 

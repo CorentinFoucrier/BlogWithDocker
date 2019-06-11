@@ -2,7 +2,8 @@
 
 namespace App;
 
-class PaginatedQuery {
+class PaginatedQuery
+{
 
     /**
      * @var string
@@ -54,6 +55,7 @@ class PaginatedQuery {
 
     /**
      * Constructeur
+     * @param string $queryCount requête SQL pour compté le nombre
      */
     public function __construct
     (
@@ -73,7 +75,8 @@ class PaginatedQuery {
     }
 
     /**
-     * Liste des éléments d'une pages
+     * @return array Liste des éléments d'une pages
+     * @param void
      */
     public function getItems(): ?array
     {
@@ -95,7 +98,8 @@ class PaginatedQuery {
     }
 
     /**
-     * retourne un tableau [(int)noPage => url, ...]
+     * @return array Un tableau [(int)noPage => url, ...]
+     * @param void
      */
     public function getNav(): array
     {
@@ -110,6 +114,10 @@ class PaginatedQuery {
         return $navArray;
     }
 
+    /**
+     * @return string Le HTML pour la pagination
+     * @param void
+     */
     public function getNavHtml(): string
     {
         $urls = $this->getNav();
@@ -151,15 +159,17 @@ HTML;
     }
 
     /**
-     * Retourne le nb de la page courrante recup dans le GET
+     * @return int Le nb de la page courrante recup dans le GET
+     * @param void
      */
-    private function getCurrentPage()
+    private function getCurrentPage(): int
     {
         return URL::getPositiveInt('page', 1);
     }
 
     /**
-     * retourne le nb total de pages en fonction du nb de post affiché par page
+     * @return float Le nb total de pages en fonction du nb de post affiché par page
+     * @param void
      */
     private function getNbPages(): float
     {

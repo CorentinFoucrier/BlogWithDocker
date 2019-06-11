@@ -50,9 +50,7 @@ $paginated = new App\PaginatedQuery(
     6
 );
 $categories = $paginated->getItems();
-//dd($paginated->getItems());
 ?>
-
 <section class="home">
         <? foreach ($categories as $category) : ?>
         <article class="homeArticle">
