@@ -57,15 +57,13 @@ class PaginatedQuery
      * Constructeur
      * @param string $queryCount requête SQL pour compté le nombre
      */
-    public function __construct
-    (
+    public function __construct(
         string $queryCount,
         string $query,
         string $classMapping,
         string $url,
         int    $perPage = 12
-    )
-    {
+    ) {
         $this->queryCount   = $queryCount;
         $this->query        = $query;
         $this->classMapping = $classMapping;
@@ -107,7 +105,7 @@ class PaginatedQuery
         $nbPage = $this->getNbPages();
 
         $navArray = [];
-        for ($i=1; $i <= $nbPage; $i++) { 
+        for ($i=1; $i <= $nbPage; $i++) {
             $url = $i == 1 ? $uri : $uri . "?page=" . $i;
             $navArray[$i] = $url;
         }
