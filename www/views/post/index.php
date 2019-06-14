@@ -5,7 +5,6 @@
  */
 
 use App\Model\Post;
-use App\Helpers\Text;
 use App\Connexion;
 
 $title = "Super Blog";
@@ -26,18 +25,22 @@ $paginated = new App\PaginatedQuery(
 
 $posts = $paginated->getItems();
 
+$postById = [];
+foreach ($posts as $post) {
+    $postById[$post->getId()] = $post;
+    $categories = Post::categoriesQuery($post->getId());
+    $postById[$post->getId()]->setCategories($categories);
+}
+
 ?>
 
     <section class="home">
-        <? foreach ($posts as $post) : ?>
-        <article class="homeArticle">
-            <h2><?= 'N°'. $post->getId() . ' -' ?> <?= $post->getName() ?></h2>
-            <p><?= Text::excerpt($post->getContent()) ?><span class="text-muted">Posté le : <?= $post->getCreatedAt() ?></span></p>
-            <div>
-                <a class="myButton" href="<?= $router->url('post', ['id' => $post->getID(), 'slug' => $post->getSlug()]) ?>">About more...</a>
-            </div>
-        </article>
-        <? endforeach ?>
+        <?php /** @var Post::class $post */
+        foreach ($posts as $post) {
+            $categories = $post->getCategories();
+            require 'card.php';
+        }
+        ?>
     </section>
 
 <?= $paginated->getNavHtml() ?>

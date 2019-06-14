@@ -44,16 +44,16 @@ $title = $post->getName();
 <section class="post">
     <article>
 
-        <h3>
+        <h4>
         Catégories: 
         <? foreach ($categories as $key => $category) : 
         if ($key > 0) {
             echo ', ';
         }?>
 
-        <?= $category->getName() ?>
+        <a href="<?= $router->url('category', ['id' => $category->getID(), 'slug' => $category->getSlug()]) ?>"><?= $category->getName() ?></a>
         <? endforeach ?>
-        </h3>
+        </h4>
 
         <p><?= htmlspecialchars($post->getContent()) ?></p>
 
